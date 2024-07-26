@@ -1,0 +1,9 @@
+pandas
+openai
+sklearn.feature_extraction.text
+sklearn.metrics.pairwise
+re
+json
+difflib
+nump
+jieba
