@@ -12,7 +12,7 @@ import jieba
 file_path = "example.xlsx"
 xls = pd.ExcelFile(file_path)
 sheets = {sheet_name: xls.parse(sheet_name) for sheet_name in xls.sheet_names}
-standard_dept_file_path = 'D:/标准科室列表.xlsx'
+standard_dept_file_path = "标准科室列表.xlsx"
 std_xls = pd.ExcelFile(standard_dept_file_path)
 std_sheets = {sheet_name: std_xls.parse(sheet_name) for sheet_name in std_xls.sheet_names}
 
@@ -197,7 +197,7 @@ def main(file_path,new_dialogue):
     save_to_json(new_dialog, departments, few_shot, api_out, answer_department, source, file_path)
 
 
-file_path = 'D:/dialog-T.json'
+file_path = 'dialog-TT.json'
 new_dialog =  "患者:2岁小孩嘴里长了很多小泡,应该去哪个科？"
 main(file_path, new_dialog)
 
