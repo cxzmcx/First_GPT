@@ -9,7 +9,7 @@ from difflib import get_close_matches
 import numpy as np
 import jieba
 
-file_path = 'D:/example.xlsx'
+file_path = "example.xlsx"
 xls = pd.ExcelFile(file_path)
 sheets = {sheet_name: xls.parse(sheet_name) for sheet_name in xls.sheet_names}
 standard_dept_file_path = 'D:/标准科室列表.xlsx'
