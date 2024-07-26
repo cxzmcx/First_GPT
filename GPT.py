@@ -61,7 +61,7 @@ def find_similar_examples(new_dialog, df):
 def generate_cot(dialogue, answer):
     prompt = f"""对话: {dialogue}
                问题: 患者应该挂什么科？
-               请根据{dialogue}和{answer}来生成详细的推理过程和最终的建议，建议去的专业是{answer},输出不要包含对话，只包含推理过程和建议"""
+               请根据{dialogue}和{answer}来生成详细的推理过程和最终的建议，建议去的专业是{answer},输出不要包含医生和病人的对话，只包含推理过程和建议即可(注意医生和病人的对话只根据{dialogue}即可，不用重新生成对话)"""
     response =  client.chat.completions.create(
         model= "moonshot-v1-8k",
         messages=[
