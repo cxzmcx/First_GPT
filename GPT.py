@@ -17,7 +17,7 @@ std_xls = pd.ExcelFile(standard_dept_file_path)
 std_sheets = {sheet_name: std_xls.parse(sheet_name) for sheet_name in std_xls.sheet_names}
 
 client = OpenAI(
-    api_key = 'sk-w003ue0vYegC7cbFVRYbkOd1kpCJB3AHkIljE3n3AT7OvXWj',
+    api_key = '***************8',
     base_url = "https://api.moonshot.cn/v1",
 )
 

@@ -1,9 +1,2 @@
-pandas
-openai
-sklearn.feature_extraction.text
-sklearn.metrics.pairwise
-re
-json
-difflib
-nump
-jieba
+#下载的库
+pip install opanai pandas json jieba openpyxl 
