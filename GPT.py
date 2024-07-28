@@ -8,6 +8,7 @@ import json
 from difflib import get_close_matches
 import numpy as np
 import jieba
+import openpyxl
 
 file_path = "example.xlsx"
 xls = pd.ExcelFile(file_path)
@@ -17,7 +18,7 @@ std_xls = pd.ExcelFile(standard_dept_file_path)
 std_sheets = {sheet_name: std_xls.parse(sheet_name) for sheet_name in std_xls.sheet_names}
 
 client = OpenAI(
-    api_key = '***************8',
+    api_key = '*****************',
     base_url = "https://api.moonshot.cn/v1",
 )
 
@@ -198,9 +199,7 @@ def main(file_path,new_dialogue):
 
 
 file_path = 'dialog-TT.json'
-new_dialog =  """患者：你好，医生，我最近感觉眼睛不太舒服，好像看到一些黑影和闪光。（男，27岁）
-医生：您好，请问您的视力有没有下降？眼睛有没有红肿热痛或分泌物？
-患者：好像没有红肿和分泌物，视力感觉有点变差。"""
+new_dialog =  "患者：我想查一下HPV。（女，27岁）"
 main(file_path, new_dialog)
 
 
