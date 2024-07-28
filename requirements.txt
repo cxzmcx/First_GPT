@@ -1,2 +1,7 @@
-#下载的库
-pip install opanai pandas json jieba openpyxl 
+pandas
+openai
+re
+json
+difflib
+jieba
+sklearn
