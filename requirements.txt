@@ -1,7 +1,5 @@
 pandas
 openai
-re
 json
 difflib
 jieba
-sklearn
