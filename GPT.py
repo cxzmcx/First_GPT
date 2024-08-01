@@ -9,6 +9,7 @@ from difflib import get_close_matches
 import numpy as np
 import jieba
 import openpyxl
+import os
 
 file_path = "example.xlsx"
 xls = pd.ExcelFile(file_path)
@@ -18,7 +19,7 @@ std_xls = pd.ExcelFile(standard_dept_file_path)
 std_sheets = {sheet_name: std_xls.parse(sheet_name) for sheet_name in std_xls.sheet_names}
 
 client = OpenAI(
-    api_key = '*****************',
+    api_key = 'sk-w003ue0vYegC7cbFVRYbkOd1kpCJB3AHkIljE3n3AT7OvXWj',
     base_url = "https://api.moonshot.cn/v1",
 )
 
@@ -163,9 +164,19 @@ def find_closest_department(api_out_content, candidate_departments):
     return candidate_departments[best_match_index] if similarity_scores[best_match_index] > 0 else "其它"
 
 
-# 将结果保存为 JSON 文件
+def get_next_sample_id(file_path):
+    if os.path.exists(file_path):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            # 使用正则表达式查找 sample_id
+            match = re.search(r'"sample_id":\s*(\d+)', content)
+            if match:
+                return int(match.group(1)) + 1
+    return 1
+
 def save_to_json(new_dialog, departments, few_shot, api_output, answer_department, source, file_path):
-   
+    # 获取下一个 sample_id
+    sample_id = get_next_sample_id(file_path)
     data = {
         "dialogue": new_dialog,
         "department": departments,
@@ -173,9 +184,10 @@ def save_to_json(new_dialog, departments, few_shot, api_output, answer_departmen
         "question": "患者应该挂什么科？",
         "api_output": api_output,
         "answer_department": answer_department,
-        "sample_id": "sample_12",  # 更新样本 ID
+        "sample_id": sample_id,
         "source": source
     }
+    
     # 使用 json.dumps 格式化 JSON 字符串
     formatted_json = json.dumps(data, ensure_ascii=False, indent=4)
 
@@ -186,6 +198,8 @@ def save_to_json(new_dialog, departments, few_shot, api_output, answer_departmen
 
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(formatted_json)
+
+
 
 def main(file_path,new_dialogue):
     source = determine_source(new_dialog, sheets)
@@ -199,7 +213,7 @@ def main(file_path,new_dialogue):
 
 
 file_path = 'dialog-TT.json'
-new_dialog =  "患者：我想查一下HPV。（女，27岁）"
+new_dialog =  "医生，我这膝盖关节一到阴雨天就疼得厉害，走路都受影响，是怎么回事呢？"
 main(file_path, new_dialog)
 
 
